@@ -1,0 +1,30 @@
+[
+    {
+        "fullName":"marko requis",
+        "userName":"marko",
+         "image":"marko.png",
+         "posted":4,
+         "likeButton":10,
+         "repliesButton":123,
+         "content":"Distinctio, illo molestias nemo voluptas facilis veniam possimus inventore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores consequatur veniam nobis enim molestias omnis cupiditate distinctio, recusandae ipsa harum?"
+    },
+
+    {
+        "fullName":"jamal derullo",
+        "userName":"jamal",
+         "image":"jamal.png",
+         "posted":8,
+         "likeButton":160,
+         "repliesButton":1236,
+         "content":"Distinctio, illo molestias nemo voluptas facilis veniam possimus inventore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores consequatur veniam nobis enim molestias omnis cupiditate distinctio, recusandae ipsa harum?"
+    },
+    {
+        "fullName":"peter",
+        "userName":"peter",
+         "image":"peter.png",
+         "posted":4,
+         "likeButton":100,
+         "repliesButton":1234,
+         "content":"Distinctio, illo molestias nemo voluptas facilis veniam possimus inventore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores consequatur veniam nobis enim molestias omnis cupiditate distinctio, recusandae ipsa harum?"
+    }
+]
