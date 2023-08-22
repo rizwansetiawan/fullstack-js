@@ -2,11 +2,12 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import Thread from "../entities/tbThread";
 import { Request,Response } from "express";
+import { createThreadSchema } from "../utils/threads-validate";
 
 class ThreadService{
     
-    private readonly threadRepository: Repository<Thread> =
-    AppDataSource.getRepository(Thread); 
+    private readonly threadRepository : Repository<Thread> =
+    AppDataSource.getRepository(Thread);  
 
     async find(req:Request,res:Response):Promise<Response>{
         try{
@@ -28,7 +29,7 @@ class ThreadService{
             const thread = await this.threadRepository.findOne(
                 
                 {
-                    where: {id:id},
+                    where: {id},
                     relations : ['user']
                 },
             )
@@ -36,21 +37,24 @@ class ThreadService{
         } catch(err){
             return res.status(500).json({error:"error while getting thread"})
     }}relations : ['user']
+
     async create(req:Request,res:Response):Promise<Response>{
-        const data = req.body
+        const {content,image} = req.body;
         try{
-            const thread = this.threadRepository.create(
-                {
-                    content: data.content,
-                    image:data.image,
-                    // user:data.user
-                }
+            this.relations = ["user"]
+            const threads = await this.threadRepository.create({
+                content,
+                image:res.locals.filename,
+            }
             )
-            const createdThread = this.threadRepository.save(thread)
-            return res.status(200).json(createdThread)
-        } catch(err){
-            return res.status(500).json({error:"error while create data "})
-    }}
+
+            const saveThread = await this.threadRepository.save(threads)
+                return res.status(200).json(saveThread)
+        }catch(err){
+            return res.status(500).json({error:"error"})
+        }
+    }
+
     async delete(req:Request,res:Response):Promise<Response>{
         const id = parseInt(req.params.id)
 

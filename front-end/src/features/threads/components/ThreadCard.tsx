@@ -12,7 +12,7 @@ export interface iUser{
     fullName?:string;
     userName?:string;
     profil_picture?:string;
-    email?:string;
+    // email?:string;
     password?:string;
     
 }

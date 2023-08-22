@@ -5,4 +5,5 @@ export const authReducer = authSlice.reducer;
 const rootReducer = combineReducers ({
     auth:authReducer
 })
+
 export default rootReducer

@@ -1,25 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { iUser } from "../../features/threads/components/ThreadCard";
-
-
+import { setAuthToken } from "../../libs/API";
 
     export const initialAuthState :iUser = { 
         id:0,
         fullName:"",
         userName:"",
-        email:"",
-        // password:"",
-        // profil_picture:""
+        // email:"",
     }
     export const authSlice = createSlice({
         name: "auth",
         initialState:initialAuthState,
         reducers:{
             AUTH_LOGIN:(_,action)=>{
-                const payload = action.payload
-                console.log("YOUR DATA",payload)
-                localStorage.setItem("token",payload.token)
-
+            console.log("login berhasil hehe",action.payload);
+            alert("berhasil login")
+            localStorage.setItem("token",action.payload.token);
+            setAuthToken(localStorage.token);
             },
             AUTH_CHECK:(state,action)=>{
 
@@ -28,7 +25,6 @@ import { iUser } from "../../features/threads/components/ThreadCard";
 
             },
             AUTH_LOGOUT:(state)=>{
-
             }
         }
     })

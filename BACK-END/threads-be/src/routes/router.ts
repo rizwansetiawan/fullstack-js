@@ -3,6 +3,7 @@ import * as express from "express";
 import { Request,Response } from "express";
 import authController from "../controller/authController";
 import Authenticate from "../middlewares/authMidddleWare";
+import {UploadImage} from "../middlewares/objectUpload";
 const router = express.Router();
 
 router.get("/",(req:Request,res:Response) => {
@@ -10,7 +11,7 @@ router.get("/",(req:Request,res:Response) => {
 })
 router.get('/threads',Authenticate,ThreadController.find)
 router.get('/threads/:id',ThreadController.findOne) 
-router.post('/create',Authenticate,ThreadController.create) 
+router.post('/create',Authenticate,UploadImage("image"),ThreadController.create) 
 router.get('/delete/:id',ThreadController.delete)
 router.patch('/update/:id',ThreadController.update)
 router.post('/register',authController.register)

@@ -25,7 +25,7 @@ private readonly authRepository: Repository<User> = AppDataSource.getRepository(
                     userName: value.userName
                 },
             })
-            if(checkEmail >0){
+            if(checkEmail > 0){
                 return res.status(400).json("email sudah di gunakan")
             }
             const user = this.authRepository.create({

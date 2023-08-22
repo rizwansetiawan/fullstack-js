@@ -1,17 +1,17 @@
-import { Entity, ManyToOne, OneToMany } from "typeorm";
-import { User } from "./tbUser";
-import Thread from "./tbThread";
+// import { Entity, ManyToOne, OneToMany } from "typeorm";
+// import { User } from "./tbUser";
+// import Thread from "./tbThread";
 
-Entity({name: "replies"})
-export class Replies {
-    id:number;
+// Entity({name: "replies"})
+// export class Replies {
+//     id:number;
 
-    content:string;
+//     content:string;
 
-    @ManyToOne(()=>User,(users)=>users.replies)
-    user: User;
+//     @ManyToOne(()=>User,(users)=>users.replies)
+//     user: User;
 
-    @ManyToOne(()=>Thread,(threads)=>threads.replies)
-    thread: Thread;
+//     @ManyToOne(()=>Thread,(threads)=>threads.replies)
+//     thread: Thread;
 
-}
+// }

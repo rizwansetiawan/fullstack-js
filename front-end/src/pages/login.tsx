@@ -14,6 +14,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import AuthLogin from '../services/authLogin'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
   const {handleChange,handleLogin} = AuthLogin()
@@ -61,6 +62,10 @@ export default function Login() {
                 }}>
                 Login
               </Button>
+              <Box display={"flex"} gap={5}>
+              <Text>Not have ready account ? </Text>
+             <Link to={'/register'}> <Text display={"flex"} color={"blue.400"} cursor={"pointer"}> Register</Text></Link>
+             </Box>
             </Stack>
           </Stack>
         </Box>

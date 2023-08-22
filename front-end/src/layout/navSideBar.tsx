@@ -14,6 +14,7 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
+  Button,
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -25,6 +26,7 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { ReactText } from 'react'
+import { Link } from 'react-router-dom'
 
 interface LinkItemProps {
   name: string
@@ -88,6 +90,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
+     <Link to={"/login"}> <Button onClick={(()=>localStorage.removeItem("token"))} color={"white"} ms={8} mt={5} bg={"cyan.400"} >Logout</Button></Link>
     </Box>
   )
 }
@@ -127,6 +130,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
+      
     </Box>
   )
 }

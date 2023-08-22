@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Thread from "./tbThread";
-import { Like } from "./tbLikeButton";
-import { Replies } from "./tbRepliesButton";
-import { Follows } from "./tbFollows";
+// import { Like } from "./tbLikeButton";
+// import { Replies } from "./tbRepliesButton";
+// import { Follows } from "./tbFollows";
 
 @Entity({name:"user"})
 export class User {
@@ -30,9 +30,9 @@ export class User {
     
     @OneToMany(()=> Thread,(thread)=>thread.user)
     threads:Thread[];
-    like:Like[];
-    replies:Replies[];
-    follows:Follows[];
+    // like:Like[];
+    // replies:Replies[];
+    // follows:Follows[];
 
     // @OneToMany(()=>Like,(likes)=>likes.user)
     // like:Like[];
