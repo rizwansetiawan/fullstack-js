@@ -1,17 +1,19 @@
 import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
 import * as express from "express"
 import { Request,Response } from "express"
 import router from "./routes/router"
 import * as cors from "cors";
+import 'dotenv/config';
+
+
 AppDataSource.initialize().then(async () => {
     const app = express();
     const port = 5000;
-
-    app.use(cors())
+    console.log("ini env",process.env.CLOUD_NAME)
+    app.use(cors()) 
 
     app.use(express.json());
-    app.use("/api/v1",router);
+    app.use("/api/v1",router); 
 
     app.get("/", (req:Request, res:Response) => {
         res.send("hello world")

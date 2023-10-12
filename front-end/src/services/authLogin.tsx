@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { iLogin } from "../features/threads/components/ThreadCard";
 import { API } from "../libs/API";
 import { useDispatch } from "react-redux";
-import { AUTH_LOGIN } from "../stores/rootReducer";
+import { AUTH_LOGIN, AUTH_LOGOUT } from "../stores/rootReducer";
 import { useNavigate } from "react-router-dom";
 export default function AuthLogin(){
 
@@ -31,8 +31,19 @@ export default function AuthLogin(){
             console.log("gagal login euy",error)
         }
     }
+    async function handleLogout(){
+        try{
+            const response = await API.post("/logout",formData)
+            dispatch(AUTH_LOGOUT(response.data))
+            alert("logout berhasil")
+            useNav("/login")
+        }catch(error){
+            alert("logout gagal")
+            console.log("gagal login euy",error)
+        }
+    }
 
-return {handleChange,handleLogin}
+return {handleChange,handleLogin,handleLogout}
 
 
 }

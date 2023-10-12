@@ -35,7 +35,7 @@ export class User {
     // follows:Follows[];
 
     // @OneToMany(()=>Like,(likes)=>likes.user)
-    // like:Like[];
+    // likes:Like[];
 
     // @OneToMany(()=>Replies,(replies)=>replies.user)
     // replies:Replies[];

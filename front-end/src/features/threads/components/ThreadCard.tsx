@@ -3,7 +3,7 @@ export default interface iThreadCard {
     user?:iUser;
     image?:string;
     content?:string;
-    posted?:string;
+    posted?:Date;
     likeButton?:string;
     repliesButton?:string;
 }
@@ -12,7 +12,7 @@ export interface iUser{
     fullName?:string;
     userName?:string;
     profil_picture?:string;
-    // email?:string;
+    email?:string;
     password?:string;
     
 }

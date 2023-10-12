@@ -10,7 +10,7 @@ const Authenticate = (
     // console.log(authorizationHeader.startsWith("Bearer "))
 
     if(!authorizationHeader || !authorizationHeader.startsWith("Bearer ")){
-        return res.status(400).json({ 
+        return res.status(401).json({ 
             Error:"Unauthorized"
          })
     }
@@ -21,7 +21,7 @@ const Authenticate = (
         res.locals.loginSession = loginSession 
         next()
     }catch(error){
-        return res.status(400).json(error)
+        return res.status(401).json(error)
     }
 }
 export default  Authenticate

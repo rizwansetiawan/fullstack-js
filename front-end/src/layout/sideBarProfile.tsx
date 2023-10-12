@@ -11,12 +11,28 @@ import {
   Text,
   Stack,
   Button,
-  Link,
   useColorModeValue,
-  Card,
 } from '@chakra-ui/react'
+import { useSelector } from 'react-redux';
+import { rootState } from '../stores/types/rootState';
 
+export interface ThreadCards {
+  id?:number;
+  user?:User;
+  image?:string;
+  content?:string;
+  posted?:string;
+  likeButton?:string;
+  repliesButton?:string;
+}
+export interface User{
+  fullName?:string;
+  userName?:string;
+  profil_picture?:string;
+  password?:string;
+}
 export default function SideBarProfile() {
+  const auth = useSelector((state:rootState)=>state.auth)
   return (
     <Center py={6} >
       <Box
@@ -35,12 +51,10 @@ export default function SideBarProfile() {
           objectFit="cover"
           alt="#"
         />
-        <Flex justify={'left'} ms={5} mt={-12}>
+        <Flex justify={'left'} ms={5} mt={-12}> 
           <Avatar
             size={'xl'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+            src={auth.profil_picture}
             css={{
               border: '2px solid white',
             }}
@@ -51,10 +65,10 @@ export default function SideBarProfile() {
         <Box p={6}>
           <Stack spacing={0} align={'left'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-              Jamal Derullo
+              {auth.fullName}
             </Heading>
-            <Text color={'gray.500'} fontSize={"12px"}>@jamal_21</Text>
-            <Text color={'gray.900'}  fontSize={"12px"}>lorem ipsum dolor sit amet some quick and slice</Text>
+            <Text color={'gray.500'} fontSize={"12px"}>@{auth.userName}</Text>
+            <Text color={'gray.900'} fontSize={"12px"}>lorem ipsum dolor sit amet some quick and slice</Text>
             <Text color={'gray.900'} fontSize={"12px"}mt={4} display={"flex"}gap={6}>491 Following
             <Text color={'gray.900'} fontSize={"12px"}>290 Follower</Text>
             </Text>

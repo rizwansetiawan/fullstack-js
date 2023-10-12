@@ -1,47 +1,74 @@
-import { Routes,Route, useNavigate } from "react-router-dom"
+import { Routes,Route, useNavigate,Navigate, Outlet } from "react-router-dom"
 import IndexPage from "./pages/index"
 import Register from "./pages/regsiter"
 import Login from "./pages/login"
 import RepliesPageDetails from "./pages/pageDetails"
 import { useEffect, useState } from "react"
 import { API, setAuthToken } from "./libs/API"
-// import { useEffect } from "react"
-// import { AUTH_CHECK } from "./stores/rootReducer"
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+import { rootState } from "./stores/types/rootState"
+import { AUTH_CHECK, AUTH_ERROR } from "./stores/rootReducer"
+import { IsLoading } from "./layout/loadingPage"
+
 function App() {
   const [isLoading,setIsLoading] = useState<boolean>(true);
+  const auth = useSelector((state:rootState)=>state.auth)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
 async function authCheck(){
   try{
     setAuthToken(localStorage.token);
     const response = await API.get("/check")
-    console.log("auth check successful",response)
+    dispatch(AUTH_CHECK(response.data.user))
     setIsLoading(false);
   }catch(error){
-    localStorage.removeItem("token")
-    navigate("/login")
+    dispatch(AUTH_ERROR())
     setIsLoading(false);
-    console.log("auth check failed")
+    navigate("/login")
   }
 }
 
   useEffect(()=>{
+    if(localStorage.token){
     authCheck();
+    }else{
+      setIsLoading(false)
+    }
   },[])
 
-
+  function IsLogin (){
+    if(!auth.email){
+      return <Navigate to={'/login'}/>
+    }else{
+    return <Outlet/>}
+  }
+  function IsNotLogin (){
+    if(auth.email){
+      return <Navigate to={'/'}/>
+    }else{
+    return <Outlet/>}
+  }
   return (
       <>
-      {isLoading ? null :(
+      {isLoading ? <IsLoading/> :(
      
     <Routes>
-      
-      <Route path="/" element={<IndexPage/>}/>
-      <Route path="/register" element={<Register/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/detail/:id" element={<RepliesPageDetails/>}/>
+    <Route path="/loading" element={<IsLoading/>}/>
+      <Route path="/" element={<IsLogin/>}>
+       
+        <Route path="/" element={<IndexPage/>}/>
+        <Route path="/detail/:id" element={<RepliesPageDetails/>}/>
+      </Route>
+
+      <Route path="/" element={<IsNotLogin/>}>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/login" element={<Login/>}/>
+      </Route>
         
     </Routes>
+    
       )}
       </>
   )

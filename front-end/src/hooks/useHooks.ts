@@ -1,9 +1,10 @@
 import React, { useState,useEffect } from "react"
 import { API, setAuthToken } from "../libs/API"
 import { ThreadCards } from "../layout/centerCardcontent"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+
 export default function UseHooks(){
-    
+    const navigate = useNavigate()
     const [thread,setThread] = useState<ThreadCards[]>([])
   async function fetch(){
     const response = await API.get('/threads')
@@ -18,7 +19,7 @@ const {id} = useParams();
   const [threadDetail,setThreadDetail] = useState<ThreadCards | null>(null);
   async function getThread(){
     try{
-    const response = await API.get(`/threads/${id}`)
+    const response = await API.get(`/thread/${id}`)
     setThreadDetail(response.data)
   }catch (error){
     console.log("data gagal di ambil",error)
@@ -48,10 +49,7 @@ const file = event.target.files && event.target.files[0]
 if(file){
   setImageData(file)
 }
-}
-        
-
-        
+}       
     const fecthCreatePost = async(event:React.FormEvent)=>{
         event.preventDefault();
         setAuthToken(localStorage.token)
@@ -62,9 +60,21 @@ if(file){
         }else{
           formData.append("image",'')
         }
+        
         try{
-            const response = await API.post("/create",formData)
+            setAuthToken(localStorage.token)
+            const response = await API.post("/create_thread",formData)
+            // const HandleLoading = ()=>{  response.status==201}
+            
             fetch()
+
+            // if(response.data){
+            //   navigate('/loading')
+            //   setTimeout(()=>{
+            //     navigate("/")
+            //   },5000)
+            //  await fetch()
+            // }
             console.log("create succes",response)
         }catch(error){
             console.log('error creating data',error)
@@ -79,6 +89,19 @@ if(file){
             [name]:value
         }))
     }
+
+    // const [isLoading,setLoading] = useState(false)
+    // console.log(isLoading)
+    // const handleLoading = ()=>{
+    //   setLoading(true)
+    //   try{
+    //     fecthCreatePost
+    //   }catch(error){
+    //     console.log("gagal",error)
+    //   }finally{
+    //     setLoading(false)
+    //   }
+    // }
 
 
 return {thread,setThread,formData,setFormData,fecthCreatePost,handleChange,threadDetail,imageData,handleContentChange,handleImageChange}

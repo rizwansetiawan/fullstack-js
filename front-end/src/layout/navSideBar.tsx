@@ -1,5 +1,4 @@
 'use client'
-
 import React, { ReactNode } from 'react'
 import {
   IconButton,
@@ -26,7 +25,9 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import { ReactText } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { AUTH_LOGOUT } from '../stores/rootReducer'
 
 interface LinkItemProps {
   name: string
@@ -41,6 +42,7 @@ const LinkItems: Array<LinkItemProps> = [
 ]
 
 export default function NavSidebar() {
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box minH="100vh" bg={useColorModeValue('white', 'white')}>
@@ -70,6 +72,14 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const Logout = ()=> {
+    dispatch(AUTH_LOGOUT())
+    navigate("/login")
+    console.log(AUTH_LOGOUT, "ini logout")
+  }
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -80,8 +90,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="left" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          circle
+        <Text fontSize="5xl" fontFamily="arial" color={"cyan.400"} fontWeight="bold">
+          circLe
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
@@ -90,7 +100,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
-     <Link to={"/login"}> <Button onClick={(()=>localStorage.removeItem("token"))} color={"white"} ms={8} mt={5} bg={"cyan.400"} >Logout</Button></Link>
+  <Button color={"white"} ms={8} mt={5} bg={"cyan.400"} onClick={Logout}>Logout</Button>
     </Box>
   )
 }

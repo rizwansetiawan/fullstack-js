@@ -5,6 +5,7 @@ import { User } from "./tbUser";
 
 @Entity({name:"threads"})
 export default class Thread {
+    
     @PrimaryGeneratedColumn()
     id:number;
 
@@ -18,7 +19,7 @@ export default class Thread {
     posted:Date
 
     @ManyToOne(()=> User,(user)=>user.threads) 
-    user:User;
+    user:User; 
 
     // @OneToMany(()=>Like,(likes)=>likes.thread)
     // like:Like[]
