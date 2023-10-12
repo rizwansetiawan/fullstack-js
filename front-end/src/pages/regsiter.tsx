@@ -25,15 +25,16 @@ export default function Reister() {
   return (
     <Flex
       minH={'100vh'}
-      align={'center'}
+      // align={'center'}
+      mt={5}
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'left'}>
-          <Heading fontSize={'5xl'} textAlign={'left'}color={"cyan.400"}>
-            circle
+      <Stack  maxW={'lg'} >
+        <Stack align={'center'}>
+          <Heading fontSize={'8xl'} fontFamily={"cursive"} color={"cyan.400"}>
+            circLe
           </Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
+          <Text fontSize={'lg'} mt={"-5"} color={'gray.600'}>
             create account circle
           </Text>
         </Stack>
@@ -41,7 +42,10 @@ export default function Reister() {
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
-          p={8}>
+          p={4}
+          w={"400px"}
+          >
+          
           <Stack spacing={4}>
           <FormControl id="fullname" >
               <FormLabel></FormLabel>
@@ -72,18 +76,18 @@ export default function Reister() {
               <Button onClick={handleRegister}
                 loadingText="Submitting"
                 size="lg"
-                bg={'blue.400'}
+                bg={'cyan.400'}
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
                 }}>
-                create
+                Create Account
               </Button>
             </Stack>
-            <Stack pt={6}>
-              <Text align={'center'}>
+            <Stack >
+              <Text align={'left'}>
                 Already have account? <Link to={'/login'}>
-               <Text display={"inline"} color={"blue"}> Login</Text>
+               <Text display={"inline"} color={"blue.600"}> Sign in</Text>
                   </Link>
               </Text>
             </Stack>

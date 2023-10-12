@@ -9,7 +9,6 @@ import 'dotenv/config';
 AppDataSource.initialize().then(async () => {
     const app = express();
     const port = 5000;
-    console.log("ini env",process.env.CLOUD_NAME)
     app.use(cors()) 
 
     app.use(express.json());

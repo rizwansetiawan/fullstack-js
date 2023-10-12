@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Flex,
@@ -12,64 +12,110 @@ import {
   Heading,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react'
-import AuthLogin from '../services/authLogin'
-import { Link } from 'react-router-dom'
+  InputRightElement,
+  InputGroup,
+} from "@chakra-ui/react";
+import AuthLogin from "../services/authLogin";
+import { Link } from "react-router-dom";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 export default function Login() {
-  const {handleChange,handleLogin} = AuthLogin()
+  const [showPassword, setShowPassword] = useState(false);
+  const { handleChange, handleLogin } = AuthLogin();
   return (
     <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'left'}>
-          <Heading fontSize={'4xl'}color={"cyan.400"}>circle</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            login to circle <Text color={'blue.400'}></Text> 
+      minH={"100vh"}
+      mt={5}
+      // align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack maxW={"lg"}>
+        <Stack align={"left"} textAlign={"center"}>
+          <Heading fontSize={"8xl"} fontFamily={"cursive"} color={"cyan.400"}>
+            circLe
+          </Heading>
+          <Text fontSize={"lg"} mt={"-5"} color={"gray.600"}>
+            login to circle
           </Text>
         </Stack>
         <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
+          rounded={"lg"}
+          w={"400px"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={4}
+        >
           <Stack spacing={4}>
-
             <FormControl id="email">
               <FormLabel></FormLabel>
-              <Input type="email" placeholder='Email address' name='email' onChange={handleChange} />
+              <Input
+                type="email"
+                placeholder="Email address"
+                name="email"
+                onChange={handleChange}
+              />
             </FormControl>
             <FormControl id="password">
-              <FormLabel></FormLabel>
-              <Input type="password" placeholder='password' name='password' onChange={handleChange} />
+              <InputGroup>
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="password"
+                  name="password"
+                  onChange={handleChange}
+                />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword: any) => !showPassword)
+                    }
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <Stack spacing={10}>
               <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}>
+                direction={{ base: "column", sm: "row" }}
+                align={"start"}
+                justify={"space-between"}
+              >
                 <Checkbox>Remember me</Checkbox>
-                <Text color={'blue.400'}>Forgot password?</Text>
+                <Text color={"blue.400"}>Forgot password?</Text>
               </Stack>
-              <Button onClick={handleLogin}
-                bg={'blue.400'}
-                color={'white'}
+              <Button
+                onClick={handleLogin}
+                bg={"cyan.600"}
+                color={"white"}
                 _hover={{
-                  bg: 'blue.500',
-                }}>
-                Login
+                  bg: "blue.500",
+                }}
+              >
+                Sign in
               </Button>
-              <Box display={"flex"} gap={5}>
-              <Text>Not have ready account ? </Text>
-             <Link to={'/register'}> <Text display={"flex"} color={"blue.400"} cursor={"pointer"}> Register</Text></Link>
-             </Box>
+              <Box display={"flex"} mt={"-5"} gap={2}>
+                <Text textAlign={"center"}>Not have ready account ? </Text>
+                <Link to={"/register"}>
+                  {" "}
+                  <Text
+                    display={"flex"}
+                    textAlign={"center"}
+                    color={"blue.400"}
+                    cursor={"pointer"}
+                  >
+                    {" "}
+                    Sign up
+                  </Text>
+                </Link>
+              </Box>
             </Stack>
           </Stack>
         </Box>
       </Stack>
     </Flex>
-  )
+  );
 }
+
